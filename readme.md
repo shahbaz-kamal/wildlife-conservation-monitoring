@@ -271,3 +271,37 @@ FROM employees
 GROUP BY department;
 ```
 In this query, `GROUP BY` department first groups the rows into three sets: one for `'Sales'`, one for `'Marketing'`, and one for `'HR'`. Then, `AVG(salary)` is calculated for the salary column within each of these department groups, resulting in a summary of average salaries per department.
+
+# Q10) How can you calculate aggregate functions like COUNT(), SUM(), and AVG() in PostgreSQL?
+
+**Answer:** In PostgreSQL, calculating aggregate functions like `COUNT()`, `SUM()`, and `AVG()` is a fundamental capability for summarizing and analyzing data, providing a single consolidated value from a set of rows. By default, when these functions are used in a SELECT statement without a `GROUP BY` clause, they perform their calculation across all rows returned by the query, yielding a grand total, count, or average.
+
+**COUNT():**
+The `COUNT()` function is used to determine the number of rows or the number of non-NULL values within a specified column. When you use `COUNT(*)`, it counts every row in the result set, including those with `NULL` values, making it ideal for simply getting the total number of records in a table. If you specify a column name, `COUNT(column_name)`, it will only tally rows where that specific column_name is `not NULL`, which is useful for understanding data completeness. Furthermore, `COUNT(DISTINCT column_name)` allows you to count only the unique, non-NULL occurrences within a column, helpful for identifying the number of unique categories or entities.
+
+For **example**, to find the total number of products in a products table, you would write:
+```sql
+SELECT COUNT(*) AS total_products FROM products;
+```
+To count how many unique vendors supply those products, you might use:
+```sql
+SELECT COUNT(DISTINCT vendor_id) AS unique_vendors FROM products;
+```
+
+**SUM():**
+The `SUM()` function is designed to calculate the total sum of all non-NULL values within a specified numeric column. This aggregate is invaluable for quantitative analysis, enabling you to quickly ascertain grand totals for monetary values, quantities, or scores. It provides a direct aggregation of numerical data, allowing you to answer questions like `"What is the total revenue generated?"` or `"What is the combined quantity of all items sold?"`.
+
+**For instance**, if you have an orders table with an amount column, you can calculate the total sales across all orders using:
+```sql
+SELECT SUM(amount) AS total_sales FROM orders;
+```
+
+**AVG():**
+Finally, the `AVG()` function computes the arithmetic mean of all non-NULL values in a designated numeric column. This function is essential for understanding the typical value or central tendency within a dataset. Whether you're looking for the average customer age, the average product rating, or the average duration of a task, `AVG()` provides a concise summary. It helps in benchmarking and understanding typical performance or characteristics.
+
+**For example**, to determine the average price of items listed in a products table, you would execute:
+
+```sql
+SELECT AVG(price) AS average_product_price FROM products;
+```
+Each of these aggregate functions becomes even more powerful when combined with the `GROUP BY` clause, allowing you to perform these calculations on specific subsets of your data, as discussed previously.
