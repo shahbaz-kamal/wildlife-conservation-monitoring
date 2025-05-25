@@ -118,3 +118,34 @@ CREATE TABLE species (
         )
     )
 );
+
+Here, `ranger_id` and `species_id` are the primary keys. Using SERIAL, PostgreSQL automatically assigns a unique, non-null integer, ensuring every record is identifiable.
+
+---
+
+## Foreign Key (FK) 🔗
+
+A Foreign Key (FK) is a constraint on a column (or columns) in one table (the "child") that links to the Primary Key of another table (the "parent"), or even the same table. It's a reference that connects related data.
+
+A key characteristic is its reference: the FK value must match an existing PK value in the parent table. Unlike PKs, an FK can usually be NULL, signifying no link for that record (unless set to NOT NULL). FKs are also not necessarily unique; many child records can link to the same parent record (e.g., many sightings can involve the same species). A table can also have multiple foreign keys, linking it to various parent tables.
+
+Foreign Keys serve several purposes:
+- Enforce referential integrity, preventing "orphan" records (like a sighting linked to a non-existent species)
+- Model data relationships (like one-to-many)
+- Control actions (like ON DELETE CASCADE or ON DELETE SET NULL) when a referenced primary key is changed or deleted
+
+### Example
+
+Let's create a sightings table to link rangers and species.
+
+```sql
+CREATE TABLE sightings (
+    sighting_id SERIAL PRIMARY KEY,
+    sighting_time TIMESTAMP NOT NULL,
+    location TEXT NOT NULL,
+    notes TEXT,
+    ranger_id INT,  -- Foreign Key
+    species_id INT, -- Foreign Key
+    FOREIGN KEY (ranger_id) REFERENCES rangers (ranger_id),
+    FOREIGN KEY (species_id) REFERENCES species (species_id)
+);
