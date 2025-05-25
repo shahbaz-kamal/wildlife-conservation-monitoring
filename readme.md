@@ -118,7 +118,7 @@ CREATE TABLE species (
         )
     )
 );
-
+```
 Here, `ranger_id` and `species_id` are the primary keys. Using SERIAL, PostgreSQL automatically assigns a unique, non-null integer, ensuring every record is identifiable.
 
 ---
@@ -149,3 +149,5 @@ CREATE TABLE sightings (
     FOREIGN KEY (ranger_id) REFERENCES rangers (ranger_id),
     FOREIGN KEY (species_id) REFERENCES species (species_id)
 );
+```
+In this `sightings` table `ranger_id` is a **foreign key** referencing `rangers.ranger_id`. `species_id` is a **foreign key** referencing `species.species_id`. These keys ensure that every sighting record is linked to a valid ranger and species, maintaining the database's integrity.
