@@ -149,3 +149,24 @@ CREATE TABLE sightings (
 );
 ```
 In this `sightings` table `ranger_id` is a **foreign key** referencing `rangers.ranger_id`. `species_id` is a **foreign key** referencing `species.species_id`. These keys ensure that every sighting record is linked to a valid ranger and species, maintaining the database's integrity.
+
+# Q4) Difference Between VARCHAR and CHAR Data Types in PostgreSQL
+**Answer:**
+## VARCHAR (Variable Character)
+VARCHAR is a variable-length character data type that stores strings of varying lengths. When you define a VARCHAR column with a length (e.g., VARCHAR(100)), it can store any string up to that maximum length, but only uses the storage space needed for the actual string content (plus a small overhead). This makes VARCHAR more space-efficient for storing data where values vary significantly in length. For example, a VARCHAR(255) column storing "hello" only uses about 5 bytes of storage (plus 1-4 bytes for length overhead). VARCHAR is ideal for most text storage needs where the length varies, such as names, descriptions, or comments.
+
+## CHAR (Character)
+CHAR is a fixed-length character data type. When you define a CHAR column (e.g., CHAR(10)), it always allocates the full specified length in storage, padding shorter values with spaces to reach the defined length. This means CHAR(10) storing "hi" actually stores "hi        " (with 8 trailing spaces). CHAR provides slightly better performance for very short strings of exactly known lengths (like country codes, gender markers, or fixed-length IDs) because the database engine knows precisely how much space each value occupies. However, it can waste significant storage space when storing values shorter than the defined length.
+
+## Key Differences
+| Characteristic       | VARCHAR                                                                 | CHAR                                                                 |
+|----------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------|
+| **Storage Efficiency** | Only uses space needed for actual content (plus small overhead)        | Always allocates full declared length, padding with spaces          |
+| **Performance**       | Slightly slower for very short strings                                 | Marginally faster for fixed-length strings                          |
+| **Padding**           | Stores only actual characters (no padding)                             | Automatically pads values with spaces to reach declared length      |
+| **Use Cases**         | Ideal for most text data where lengths vary (names, descriptions, etc) | Best for truly fixed-length values (country codes, status flags)    |
+| **Comparison**        | Compares only actual character content                                 | Comparisons include padding spaces                                  |
+| **Flexibility**       | Can store strings up to maximum declared length                        | Requires values to fit exactly or be padded                         |
+
+## Best Practices
+In PostgreSQL, VARCHAR (or its synonym TEXT for unlimited length) is generally preferred for most use cases. Only use CHAR when you specifically need fixed-width storage behavior, such as when interfacing with systems that require fixed-length records.
