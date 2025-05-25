@@ -259,7 +259,10 @@ Let's say we have an employees table:
 |:-----------:|:----------:|-------:|
 | 1           | Sales      |  50000 |
 | 2           | Marketing  |  60000 |
-...
+| 3           | Hr         |  62000 |
+| 4           | Sales      |  95000 |
+| 5           | Marketing  |  58000 |
+
 
 To find the average salary for each department, we would use the following SQL query:
 ```sql
