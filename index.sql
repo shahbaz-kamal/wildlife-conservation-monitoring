@@ -133,3 +133,7 @@ SELECT * from rangers;
 SELECT * from sightings
 
 SELECT COUNT(DISTINCT species_id) AS unique_species_count FROM sightings;
+
+-- *3️⃣ Query to find all sightings where the location includes "Pass".
+
+SELECT * FROM sightings WHERE location LIKE '%Pass%';
