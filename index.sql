@@ -183,3 +183,13 @@ SELECT sighting_id, sighting_time,
 FROM sightings ;
 
 SELECT * FROM sightings
+
+-- *9️⃣ Query to Delete rangers who have never sighted any species
+
+DELETE FROM rangers
+WHERE ranger_id NOT IN (
+    SELECT DISTINCT ranger_id FROM sightings
+);
+SELECT * FROM rangers
+
+
