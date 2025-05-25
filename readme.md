@@ -173,8 +173,7 @@ In PostgreSQL, VARCHAR (or its synonym TEXT for unlimited length) is generally p
 
 # Q5) Explain the purpose of the WHERE clause in a SELECT statement.
 
-**Answer:**  
-The WHERE clause in a SELECT statement serves the crucial purpose of filtering the rows returned by the query. Without a WHERE clause, a SELECT statement would retrieve all rows from the specified table(s). However, in many real-world scenarios, you only need to work with a subset of the data that meets specific criteria. This is where the WHERE clause comes into play, allowing you to specify conditions that each row must satisfy to be included in the result set. It effectively acts as a gatekeeper, letting through only the data that is relevant to your query.
+**Answer:** The WHERE clause in a SELECT statement serves the crucial purpose of filtering the rows returned by the query. Without a WHERE clause, a SELECT statement would retrieve all rows from the specified table(s). However, in many real-world scenarios, you only need to work with a subset of the data that meets specific criteria. This is where the WHERE clause comes into play, allowing you to specify conditions that each row must satisfy to be included in the result set. It effectively acts as a gatekeeper, letting through only the data that is relevant to your query.
 
 The conditions within the WHERE clause are typically expressed using:
 
@@ -186,3 +185,24 @@ The conditions within the WHERE clause are typically expressed using:
 - **Null value checks**: `IS NULL` or `IS NOT NULL` for identifying or excluding rows where a particular column has a null value.
 
 By using the WHERE clause effectively, you can precisely target the data you need, reducing the amount of data processed and improving the efficiency and relevance of your queries.
+
+### Q6) What are the LIMIT and OFFSET clauses used for?
+
+**Answer:**  
+The `LIMIT` and `OFFSET` clauses in SQL are used to control the number of rows returned by a query and to skip a certain number of rows before starting to return rows. These clauses are especially useful when implementing pagination in applications.
+
+The `LIMIT` clause specifies the maximum number of rows to return. For example, if you set `LIMIT 10`, only 10 records will be returned, regardless of how many total rows match the query conditions. The `OFFSET` clause tells the database how many rows to skip before starting to return the results. For instance, `OFFSET 20` will skip the first 20 rows and begin returning results from the 21st row onward.
+
+These two are commonly used together in pagination scenarios. For example:
+
+```sql
+SELECT * FROM users
+LIMIT 5 OFFSET 12;
+```
+This query will return 10 users, starting from the 13th  user in the result set.
+
+**In summary:**
+-Use LIMIT to restrict how many rows are returned.
+-Use OFFSET to skip a certain number of rows before returning results.
+
+This combination is ideal for efficiently loading data in smaller chunks, such as showing 5 results per page in a web application.
