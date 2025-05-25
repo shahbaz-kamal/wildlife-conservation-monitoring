@@ -128,3 +128,8 @@ INSERT INTO rangers (name,region) VALUES ('Derek Fox', 'Coastal Plains');
 
 SELECT * from rangers;
 
+-- *2️⃣ Query to count unique specis ever sighted
+
+SELECT * from sightings
+
+SELECT COUNT(DISTINCT species_id) AS unique_species_count FROM sightings;
