@@ -170,3 +170,19 @@ VARCHAR is a variable-length character data type that stores strings of varying 
 
 ## Best Practices
 In PostgreSQL, VARCHAR (or its synonym TEXT for unlimited length) is generally preferred for most use cases. Only use CHAR when you specifically need fixed-width storage behavior, such as when interfacing with systems that require fixed-length records.
+
+# Q5) Explain the purpose of the WHERE clause in a SELECT statement.
+
+**Answer:**  
+The WHERE clause in a SELECT statement serves the crucial purpose of filtering the rows returned by the query. Without a WHERE clause, a SELECT statement would retrieve all rows from the specified table(s). However, in many real-world scenarios, you only need to work with a subset of the data that meets specific criteria. This is where the WHERE clause comes into play, allowing you to specify conditions that each row must satisfy to be included in the result set. It effectively acts as a gatekeeper, letting through only the data that is relevant to your query.
+
+The conditions within the WHERE clause are typically expressed using:
+
+- **Comparison operators**: Such as `=`, `>`, `<`, `>=`, `<=`, `<>` (not equal). For example, `WHERE age > 30` would only select records where the age column is greater than 30.
+- **Logical operators**: `AND`, `OR`, `NOT`, which allow you to combine multiple conditions. For instance, `WHERE age > 30 AND city = 'New York'` would retrieve records for individuals over 30 who live in New York.
+- **Pattern matching operators**: Like `LIKE` and `ILIKE` (case-insensitive LIKE) for searching for specific patterns within string data. For example, `WHERE name LIKE 'A%'` would find all names starting with the letter 'A'.
+- **Range operators**: `BETWEEN` for specifying a range of values. For example, `WHERE sales BETWEEN 100 AND 500`.
+- **Set operators**: `IN` for checking if a value exists within a list of values. For example, `WHERE status IN ('active', 'pending')`.
+- **Null value checks**: `IS NULL` or `IS NOT NULL` for identifying or excluding rows where a particular column has a null value.
+
+By using the WHERE clause effectively, you can precisely target the data you need, reducing the amount of data processed and improving the efficiency and relevance of your queries.
