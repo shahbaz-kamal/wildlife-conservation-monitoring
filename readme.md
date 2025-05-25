@@ -82,3 +82,41 @@ Helpful for separating different environments:
 - Isolate test data from production data
 
 In essence, schemas bring order and control to your PostgreSQL databases, making them more manageable, secure, and scalable, especially as their complexity grows.
+
+# Q3) Explain the Primary Key and Foreign Key concepts in PostgreSQL.
+
+**Answer:**  
+
+In the world of databases, especially relational ones like PostgreSQL, keys are fundamental. Think of them as special signposts or identifiers within your data. At their core, keys are one or more columns within a table whose values serve several crucial purposes. They help in uniquely identifying individual rows, making it possible to manage large datasets. Keys also establish and enforce links between different tables, letting you build complex models reflecting real-world connections. Furthermore, they help maintain data integrity by setting rules about values and relationships, and they often boost performance because indexes are usually created on them, speeding up data retrieval. While various key types exist, the most important ones are Primary Keys and Foreign Keys.
+
+Let's dive into these two essential concepts in PostgreSQL.
+
+## Primary Key (PK) 🔑
+
+A Primary Key (PK) is a constraint on a column (or set of columns) that uniquely identifies each row in that specific table. It's the ultimate ID for a record.
+
+A primary key has distinct characteristics: it must be unique, meaning no two rows can share the same PK value. It also cannot be NULL; every record needs a PK value, a rule PostgreSQL enforces automatically. Each table can have only one primary key, though this key might consist of multiple columns (a composite key). Importantly, PostgreSQL automatically creates a unique index on the PK, making searches and joins highly efficient.
+
+The main purposes of a Primary Key are to provide a guaranteed way to pinpoint any specific row and to serve as the target or "anchor" for Foreign Keys from other tables, enabling relationships.
+
+### Example
+
+```sql
+CREATE TABLE rangers (
+    ranger_id SERIAL PRIMARY KEY, -- Primary Key
+    name VARCHAR(50) NOT NULL,
+    region TEXT NOT NULL
+);
+
+CREATE TABLE species (
+    species_id SERIAL PRIMARY KEY, -- Primary Key
+    common_name VARCHAR(50) NOT NULL,
+    scientific_name TEXT NOT NULL,
+    discover_date DATE NOT NULL,
+    conservation_status TEXT NOT NULL CHECK (
+        conservation_status IN (
+            'Critically Endangered', 'Endangered', 'Vulnerable', 
+            'Least Concern', 'Historic'
+        )
+    )
+);
