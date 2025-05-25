@@ -1,6 +1,6 @@
 # Q1) What is PostgreSQL?
 
-PostgreSQL (often called Postgres) is a powerful, open-source object-relational database system known for its reliability, scalability, and advanced features. Unlike simpler databases, PostgreSQL supports complex queries, large-scale data operations, and even non-relational data formats like JSON, making it a favorite for modern applications.
+**Answer:**PostgreSQL (often called Postgres) is a powerful, open-source object-relational database system known for its reliability, scalability, and advanced features. Unlike simpler databases, PostgreSQL supports complex queries, large-scale data operations, and even non-relational data formats like JSON, making it a favorite for modern applications.
 
 Originally developed in 1986 at UC Berkeley, PostgreSQL has grown into one of the most trusted database systems in the world. It's fully ACID-compliant (ensuring data integrity), supports multi-version concurrency control (MVCC), and is highly extensible—allowing developers to add custom functions, data types, and even programming languages like Python and JavaScript directly into the database.
 
@@ -38,7 +38,7 @@ Whether you're building a startup app, enterprise software, or a data-heavy syst
 
 # Q2) What is the Purpose of a Database Schema in PostgreSQL?
 
-Schemas are collections of database objects that are logically grouped. In PostgreSQL, a schema is essentially a namespace or a container within a database. Think of it like a folder on your computer's hard drive. Just as a folder holds files and other folders, a schema holds database objects like tables, views, functions, indexes, and data types.
+**Answer:** Schemas are collections of database objects that are logically grouped. In PostgreSQL, a schema is essentially a namespace or a container within a database. Think of it like a folder on your computer's hard drive. Just as a folder holds files and other folders, a schema holds database objects like tables, views, functions, indexes, and data types.
 
 When you create a database, it comes with a default schema named `public`. If you don't specify a schema when creating or accessing objects, PostgreSQL usually assumes you mean the `public` schema (or the first one in your `search_path`).
 
@@ -85,9 +85,7 @@ In essence, schemas bring order and control to your PostgreSQL databases, making
 
 # Q3) Explain the Primary Key and Foreign Key concepts in PostgreSQL.
 
-**Answer:**  
-
-In the world of databases, especially relational ones like PostgreSQL, keys are fundamental. Think of them as special signposts or identifiers within your data. At their core, keys are one or more columns within a table whose values serve several crucial purposes. They help in uniquely identifying individual rows, making it possible to manage large datasets. Keys also establish and enforce links between different tables, letting you build complex models reflecting real-world connections. Furthermore, they help maintain data integrity by setting rules about values and relationships, and they often boost performance because indexes are usually created on them, speeding up data retrieval. While various key types exist, the most important ones are Primary Keys and Foreign Keys.
+**Answer:** In the world of databases, especially relational ones like PostgreSQL, keys are fundamental. Think of them as special signposts or identifiers within your data. At their core, keys are one or more columns within a table whose values serve several crucial purposes. They help in uniquely identifying individual rows, making it possible to manage large datasets. Keys also establish and enforce links between different tables, letting you build complex models reflecting real-world connections. Furthermore, they help maintain data integrity by setting rules about values and relationships, and they often boost performance because indexes are usually created on them, speeding up data retrieval. While various key types exist, the most important ones are Primary Keys and Foreign Keys.
 
 Let's dive into these two essential concepts in PostgreSQL.
 
