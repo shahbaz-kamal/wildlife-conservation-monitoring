@@ -121,3 +121,10 @@ INSERT INTO sightings (sighting_time, location, notes, ranger_id, species_id) VA
 ('2024-03-21 16:00:00', 'Manaus Observation Deck', 'Flock observed feeding', 1, 15);
 
 SELECT * FROM sightings;
+
+--* 1️⃣ Query to register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
+
+INSERT INTO rangers (name,region) VALUES ('Derek Fox', 'Coastal Plains');
+
+SELECT * from rangers;
+
