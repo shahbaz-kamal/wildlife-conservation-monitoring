@@ -188,8 +188,7 @@ By using the WHERE clause effectively, you can precisely target the data you nee
 
 ### Q6) What are the LIMIT and OFFSET clauses used for?
 
-**Answer:**  
-The `LIMIT` and `OFFSET` clauses in SQL are used to control the number of rows returned by a query and to skip a certain number of rows before starting to return rows. These clauses are especially useful when implementing pagination in applications.
+**Answer:** The `LIMIT` and `OFFSET` clauses in SQL are used to control the number of rows returned by a query and to skip a certain number of rows before starting to return rows. These clauses are especially useful when implementing pagination in applications.
 
 The `LIMIT` clause specifies the maximum number of rows to return. For example, if you set `LIMIT 10`, only 10 records will be returned, regardless of how many total rows match the query conditions. The `OFFSET` clause tells the database how many rows to skip before starting to return the results. For instance, `OFFSET 20` will skip the first 20 rows and begin returning results from the 21st row onward.
 
@@ -203,7 +202,27 @@ This query will return 10 users, starting from the 13th  user in the result set.
 
 **In summary:**
 
-- Use LIMIT to restrict how many rows are returned.
-- Use OFFSET to skip a certain number of rows before returning results.
+- Use `LIMIT` to restrict how many rows are returned.
+- Use `OFFSET` to skip a certain number of rows before returning results.
 
 This combination is ideal for efficiently loading data in smaller chunks, such as showing 5 results per page in a web application.
+
+### Q7) How can you modify data using UPDATE statements?
+
+**Answer:** To modify existing data within a table in a database, you use the `UPDATE` statement. This powerful SQL command allows you to change the values of one or more columns for specific rows that meet a defined condition. The basic structure of an `UPDATE` statement involves specifying the table you want to modify, the columns you intend to change, their new values, and most importantly, a `WHERE` clause to identify which rows should be updated. Without a `WHERE` clause, the `UPDATE` statement would, by default, apply the changes to all rows in the table, which can lead to unintended data loss or corruption. For example, to change the email address of a specific user, you would use an UPDATE statement with a `WHERE` clause that identifies that user, perhaps by their `unique ID`. Similarly, to give a raise to all employees in a particular department, you would use `UPDATE` to modify the salary column for all rows where the department column matches the specified department. This selective modification ensures data integrity and allows for precise adjustments to your database records. 
+
+**For example**, to change the name of a user in a users table with an id of 5, you would write:
+
+```sql
+UPDATE users
+SET name = 'Abul Mia'
+WHERE id = 5;
+```
+You can also update multiple columns at once:
+
+```sql
+UPDATE users
+SET name = 'Babul Mia', email = 'babul@mia.com'
+WHERE id = 7;
+```
+**In summary**, `UPDATE` statements provide a powerful way to change existing data in a database, but it is important to use the `WHERE` clause carefully to avoid unintentional data changes.
