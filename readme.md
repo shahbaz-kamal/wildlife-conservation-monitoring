@@ -202,7 +202,8 @@ LIMIT 5 OFFSET 12;
 This query will return 10 users, starting from the 13th  user in the result set.
 
 **In summary:**
--Use LIMIT to restrict how many rows are returned.
--Use OFFSET to skip a certain number of rows before returning results.
+
+- Use LIMIT to restrict how many rows are returned.
+- Use OFFSET to skip a certain number of rows before returning results.
 
 This combination is ideal for efficiently loading data in smaller chunks, such as showing 5 results per page in a web application.
