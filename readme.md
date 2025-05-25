@@ -129,10 +129,8 @@ A Foreign Key (FK) is a constraint on a column (or columns) in one table (the "c
 
 A key characteristic is its reference: the FK value must match an existing PK value in the parent table. Unlike PKs, an FK can usually be NULL, signifying no link for that record (unless set to NOT NULL). FKs are also not necessarily unique; many child records can link to the same parent record (e.g., many sightings can involve the same species). A table can also have multiple foreign keys, linking it to various parent tables.
 
-Foreign Keys serve several purposes:
-- Enforce referential integrity, preventing "orphan" records (like a sighting linked to a non-existent species)
-- Model data relationships (like one-to-many)
-- Control actions (like ON DELETE CASCADE or ON DELETE SET NULL) when a referenced primary key is changed or deleted
+Foreign Keys serve multiple important purposes in relational databases. They help enforce **referential integrity**, ensuring that records cannot exist without valid relationships—for example, preventing a sighting from referencing a species that doesn’t exist. Foreign Keys also model **data relationships**, such as one-to-many connections between tables. Additionally, they allow developers to define behaviors through constraints like `ON DELETE CASCADE` or `ON DELETE SET NULL`, which control what happens when a referenced primary key is modified or deleted.
+
 
 ### Example
 
