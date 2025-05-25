@@ -29,7 +29,7 @@ CREATE TABLE
 CREATE TABLE
     sightings (
         sighting_id SERIAL PRIMARY KEY,
-        sighting_time DATE NOT NULL,
+        sighting_time TIMESTAMP NOT NULL,
         location TEXT NOT NULL,
         notes TEXT,
         ranger_id INT,
@@ -104,9 +104,9 @@ VALUES
 SELECT * from species
 
 INSERT INTO sightings (sighting_time, location, notes, ranger_id, species_id) VALUES
-('2024-03-01 07:45:00', 'Purus River Pass', 'Observed crossing riverbank', 7, 1),
-('2024-03-03 10:15:00', 'Tapajós Forest Trail', 'Tracks along muddy trail', 3, 2),
-('2024-03-05 13:00:00', 'Xingu Canopy Zone', 'Seen high in canopy', 6, 3),
+('2025-03-01 07:45:00', 'Purus River Pass', 'Observed crossing riverbank', 7, 1),
+('2025-03-03 10:15:00', 'Tapajós Forest Trail', 'Tracks along muddy trail', 3, 2),
+('2025-03-05 07:46:00', 'Xingu Canopy Zone', 'Seen high in canopy', 6, 3),
 ('2024-03-06 15:30:00', 'Manaus Observation Deck', 'Adult with cubs', 1, 4),
 ('2024-03-08 08:20:00', 'Amazon Creek Pass', 'Swimming in shallow waters', 8, 5),
 ('2024-03-10 06:50:00', 'Madeira River Edge', 'Nest spotted near reeds', 10, 6),
@@ -157,3 +157,11 @@ SELECT sp.common_name  from species AS sp FULL JOIN sightings AS si
     ON sp.species_id = si.species_id 
     GROUP BY common_name, si.sighting_id HAVING si.sighting_id IS NULL
 
+-- *6️⃣ Query to find the most recent 2 sightings of each species.
+
+SELECT * FROM sightings;
+SELECT * from rangers
+
+SELECT * from species
+
+SELECT common_name,sighting_time,name FROM sightings JOIN species ON sightings.species_id = species.species_id JOIN rangers ON sightings.ranger_id=rangers.ranger_id ORDER BY sightings.sighting_time DESC LIMIT 2;
