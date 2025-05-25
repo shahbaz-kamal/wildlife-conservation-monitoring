@@ -171,3 +171,15 @@ SELECT common_name,sighting_time,name FROM sightings JOIN species ON sightings.s
 SELECT conservation_status,count(*) FROM species GROUP BY conservation_status ;
 
 UPDATE species SET conservation_status ='Historic' WHERE discover_date < '1800-01-01';
+
+-- *8️⃣ Query to Label each sighting's time of day as 'Morning', 'Afternoon', or 'Evening'.
+
+SELECT sighting_id, sighting_time,
+    CASE
+        WHEN EXTRACT(HOUR FROM sighting_time) BETWEEN 5 AND 11 THEN 'Morning'
+        WHEN EXTRACT(HOUR FROM sighting_time) BETWEEN 12 AND 16 THEN 'Afternoon'
+        ELSE 'Evening'
+    END AS time_of_day
+FROM sightings ;
+
+SELECT * FROM sightings
