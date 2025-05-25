@@ -171,7 +171,7 @@ VARCHAR is a variable-length character data type that stores strings of varying 
 ## Best Practices
 In PostgreSQL, VARCHAR (or its synonym TEXT for unlimited length) is generally preferred for most use cases. Only use CHAR when you specifically need fixed-width storage behavior, such as when interfacing with systems that require fixed-length records.
 
-# Q5) Explain the purpose of the WHERE clause in a SELECT statement.
+# Q5) Explain the purpose of the `WHERE` clause in a `SELECT` statement.
 
 **Answer:** The WHERE clause in a SELECT statement serves the crucial purpose of filtering the rows returned by the query. Without a WHERE clause, a SELECT statement would retrieve all rows from the specified table(s). However, in many real-world scenarios, you only need to work with a subset of the data that meets specific criteria. This is where the WHERE clause comes into play, allowing you to specify conditions that each row must satisfy to be included in the result set. It effectively acts as a gatekeeper, letting through only the data that is relevant to your query.
 
@@ -186,7 +186,7 @@ The conditions within the WHERE clause are typically expressed using:
 
 By using the WHERE clause effectively, you can precisely target the data you need, reducing the amount of data processed and improving the efficiency and relevance of your queries.
 
-# Q6) What are the LIMIT and OFFSET clauses used for?
+# Q6) What are the `LIMIT` and `OFFSET` clauses used for?
 
 **Answer:** The `LIMIT` and `OFFSET` clauses in SQL are used to control the number of rows returned by a query and to skip a certain number of rows before starting to return rows. These clauses are especially useful when implementing pagination in applications.
 
@@ -207,7 +207,7 @@ This query will return 10 users, starting from the 13th  user in the result set.
 
 This combination is ideal for efficiently loading data in smaller chunks, such as showing 5 results per page in a web application.
 
-# Q7) How can you modify data using UPDATE statements?
+# Q7) How can you modify data using `UPDATE` statements?
 
 **Answer:** To modify existing data within a table in a database, you use the `UPDATE` statement. This powerful SQL command allows you to change the values of one or more columns for specific rows that meet a defined condition. The basic structure of an `UPDATE` statement involves specifying the table you want to modify, the columns you intend to change, their new values, and most importantly, a `WHERE` clause to identify which rows should be updated. Without a `WHERE` clause, the `UPDATE` statement would, by default, apply the changes to all rows in the table, which can lead to unintended data loss or corruption. For example, to change the email address of a specific user, you would use an UPDATE statement with a `WHERE` clause that identifies that user, perhaps by their `unique ID`. Similarly, to give a raise to all employees in a particular department, you would use `UPDATE` to modify the salary column for all rows where the department column matches the specified department. This selective modification ensures data integrity and allows for precise adjustments to your database records. 
 
@@ -227,7 +227,7 @@ WHERE id = 7;
 ```
 **In summary**, `UPDATE` statements provide a powerful way to change existing data in a database, but it is important to use the `WHERE` clause carefully to avoid unintentional data changes.
 
-# Q8) What is the significance of the JOIN operation, and how does it work in PostgreSQL?
+# Q8) What is the significance of the `JOIN` operation, and how does it work in PostgreSQL?
 
 **Answer:** The `JOIN` operation is fundamental in relational databases like PostgreSQL as it enables combining data from multiple tables based on related columns. This relational capability is what makes SQL databases powerful for working with normalized data structures where information is distributed across different tables. In PostgreSQL, as in other relational databases, JOIN is used to retrieve meaningful data from multiple tables by linking them through foreign key relationships. 
 The most common type of `join` is the `INNER JOIN`, which returns only the rows that have matching values in both tables. For instance, if you have a rangers table and a sightings table, you can use an `INNER JOIN` to retrieve the name of each ranger along with the species they’ve sighted.
@@ -247,7 +247,7 @@ Other types of joins include:
 
 In PostgreSQL, joins are essential for working with normalized data spread across multiple tables. They help maintain data integrity and enable efficient, organized querying of complex relationships.
 
-# Q9) What is the significance of the JOIN operation, and how does it work in PostgreSQL?
+# Q9) Explain the `GROUP BY` clause and its role in aggregation operations.
 
 **Answer:** The `GROUP BY` clause in SQL is a fundamental component used to organize rows that share common values into summary groups, allowing for the application of aggregate functions to each group. Its primary role is to enable aggregation operations on subsets of data rather than on the entire dataset. When you use `GROUP BY`, the database processes the table by collecting all rows that have identical values in the column(s) specified in the `GROUP BY` clause. Once these distinct groups are formed, any aggregate function ,such as `COUNT()`, `SUM()`, `AVG()`, `MIN()`, `MAX())` included in the `SELECT` list operates independently on the data within each of these newly formed groups. This effectively transforms detailed, row-level data into meaningful, summarized information.
 For instance, imagine you have a table named `orders` with columns like `order_id`, `customer_id`, `order_date`, and `amount`. If you want to find the total sales for each customer, simply summing the amount column would give you the grand total for all orders. However, by using `GROUP BY customer_id`, the database first identifies all orders belonging to `'Customer A'`, then all orders for `'Customer B'`, and so on. An aggregate function like `SUM(amount)` is then applied to the amount column within each customer's group, yielding the total sales for each individual customer. This is incredibly useful for analytical queries, enabling you to derive insights like departmental expenses, average product ratings, or daily sales figures. It's important to note that any column in the SELECT list that is not part of an aggregate function must also be included in the GROUP BY clause.
@@ -272,7 +272,7 @@ GROUP BY department;
 ```
 In this query, `GROUP BY` department first groups the rows into three sets: one for `'Sales'`, one for `'Marketing'`, and one for `'HR'`. Then, `AVG(salary)` is calculated for the salary column within each of these department groups, resulting in a summary of average salaries per department.
 
-# Q10) How can you calculate aggregate functions like COUNT(), SUM(), and AVG() in PostgreSQL?
+# Q10) How can you calculate aggregate functions like `COUNT()`, `SUM()`, and `AVG()` in PostgreSQL?
 
 **Answer:** In PostgreSQL, calculating aggregate functions like `COUNT()`, `SUM()`, and `AVG()` is a fundamental capability for summarizing and analyzing data, providing a single consolidated value from a set of rows. By default, when these functions are used in a SELECT statement without a `GROUP BY` clause, they perform their calculation across all rows returned by the query, yielding a grand total, count, or average.
 
