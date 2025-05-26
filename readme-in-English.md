@@ -42,7 +42,7 @@ Whether you're building a startup app, enterprise software, or a data-heavy syst
 
 When you create a database, it comes with a default schema named `public`. If you don't specify a schema when creating or accessing objects, PostgreSQL usually assumes you mean the `public` schema (or the first one in your `search_path`).
 
----
+
 
 ## Purpose of Using Schemas in PostgreSQL
 
