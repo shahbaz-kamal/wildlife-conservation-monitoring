@@ -304,39 +304,45 @@ GROUP BY department;
 
 # Q10) How can you calculate aggregate functions like `COUNT()`, `SUM()`, and `AVG()` in PostgreSQL?
 
-**Answer:** In PostgreSQL, calculating aggregate functions like `COUNT()`, `SUM()`, and `AVG()` is a fundamental capability for summarizing and analyzing data, providing a single consolidated value from a set of rows. By default, when these functions are used in a SELECT statement without a `GROUP BY` clause, they perform their calculation across all rows returned by the query, yielding a grand total, count, or average.
+**উত্তর:** PostgreSQL-এ ডেটা সামারাইজ এবং অ্যানালাইজ করার জন্য, `COUNT()`, `SUM()`, এবং `AVG()` এর মতো অ্যাগ্রিগেট ফাংশন ক্যালকুলেট করা হচ্ছে একটি মৌলিক সক্ষমতা, যা সারিগুলোর সেট থেকে একটি একক সমন্বিত মান প্রদান করে। ডিফল্টভাবে, যখন এই ফাংশনগুলো `GROUP BY` ক্লজ ছাড়া একটি SELECT স্টেটমেন্টে ব্যবহার করা হয়, তারা কুয়েরি দ্বারা রিটার্ন করা সমস্ত সারিতে তাদের ক্যালকুলেশন সম্পন্ন করে, একটি গ্র্যান্ড টোটাল, কাউন্ট, বা গড় মান প্রদান করে।
 
 **COUNT():**
-The `COUNT()` function is used to determine the number of rows or the number of non-NULL values within a specified column. When you use `COUNT(*)`, it counts every row in the result set, including those with `NULL` values, making it ideal for simply getting the total number of records in a table. If you specify a column name, `COUNT(column_name)`, it will only tally rows where that specific column_name is `not NULL`, which is useful for understanding data completeness. Furthermore, `COUNT(DISTINCT column_name)` allows you to count only the unique, non-NULL occurrences within a column, helpful for identifying the number of unique categories or entities.
+`COUNT()` ফাংশনটি সারির সংখ্যা বা একটি নির্দিষ্ট কলামে NULL নয় এমন মানের সংখ্যা নির্ধারণ করতে ব্যবহৃত হয়। যখন আপনি `COUNT(*)` ব্যবহার করেন, এটি রেজাল্ট সেটের প্রতিটি সারি গণনা করে, যেগুলোতে `NULL` মান থাকুক বা না থাকুক, যা টেবিলের মোট রেকর্ড সংখ্যা পাওয়ার জন্য আদর্শ। যদি আপনি একটি কলামের নাম নির্দিষ্ট করেন, `COUNT(column_name)`, এটি শুধুমাত্র সেই সারিগুলো গণনা করবে যেখানে নির্দিষ্ট column_name-এ `NULL` নেই, যা ডেটার সম্পূর্ণতা বোঝার জন্য উপযোগী। আরও বেশি, `COUNT(DISTINCT column_name)` আপনাকে একটি কলামের মধ্যে শুধুমাত্র ইউনিক, NULL নয় এমন ঘটনাগুলো গণনা করতে দেয়, যা ইউনিক ক্যাটাগরি বা এনটিটির সংখ্যা চিহ্নিত করতে সহায়ক।
 
-For **example**, to find the total number of products in a products table, you would write:
+**উদাহরণস্বরূপ**, একটি products টেবিলে মোট পণ্যের সংখ্যা জানতে আপনি লিখবেন:
 
 ```sql
 SELECT COUNT(*) AS total_products FROM products;
 ```
 
-To count how many unique vendors supply those products, you might use:
+সেই পণ্যগুলো সরবরাহকারী কতজন unique vendor রয়েছেন তা গণনা করতে আপনি ব্যবহার করতে পারেন:
 
 ```sql
 SELECT COUNT(DISTINCT vendor_id) AS unique_vendors FROM products;
 ```
 
 **SUM():**
-The `SUM()` function is designed to calculate the total sum of all non-NULL values within a specified numeric column. This aggregate is invaluable for quantitative analysis, enabling you to quickly ascertain grand totals for monetary values, quantities, or scores. It provides a direct aggregation of numerical data, allowing you to answer questions like `"What is the total revenue generated?"` or `"What is the combined quantity of all items sold?"`.
+`SUM()` ফাংশনটি একটি নির্দিষ্ট সংখ্যাগত কলামের সকল নন-নাল (non-NULL) মানের মোট যোগফল গণনা করার জন্য ডিজাইন করা হয়েছে। এই অ্যাগ্রিগেটটি পরিমাণগত বিশ্লেষণের জন্য অমূল্য, যা আপনাকে আর্থিক মান, পরিমাণ বা স্কোরের গ্র্যান্ড টোটাল দ্রুত নির্ধারণ করতে সক্ষম করে। এটি সংখ্যাগত ডেটার সরাসরি সমষ্টি প্রদান করে, আপনাকে এমন প্রশ্নের উত্তর দিতে সাহায্য করে যেমন:  **"মোট কত রাজস্ব অর্জিত হয়েছে?"** বা **"বিক্রিত সমস্ত আইটেমের সম্মিলিত পরিমাণ কত?"**
 
-**For instance**, if you have an orders table with an amount column, you can calculate the total sales across all orders using:
+**উদাহরণস্বরূপ**, যদি আপনার কাছে একটি orders টেবিল থাকে যাতে amount কলাম থাকে, আপনি নিম্নলিখিত কুয়েরি ব্যবহার করে সমস্ত অর্ডারের মোট বিক্রয় গণনা করতে পারেন:
 
 ```sql
 SELECT SUM(amount) AS total_sales FROM orders;
 ```
 
 **AVG():**
-Finally, the `AVG()` function computes the arithmetic mean of all non-NULL values in a designated numeric column. This function is essential for understanding the typical value or central tendency within a dataset. Whether you're looking for the average customer age, the average product rating, or the average duration of a task, `AVG()` provides a concise summary. It helps in benchmarking and understanding typical performance or characteristics.
+`AVG()` ফাংশনটি একটি নির্দিষ্ট সংখ্যাগত কলামের সকল নন-নাল (non-NULL) মানের গাণিতিক গড় (arithmetic mean) গণনা করে। এই ফাংশনটি ডেটাসেটের মধ্যে সাধারণ মান বা কেন্দ্রীয় প্রবণতা (central tendency) বোঝার জন্য অপরিহার্য। আপনি গড় গ্রাহক বয়স, গড় পণ্য রেটিং বা একটি টাস্কের গড় সময়কাল খুঁজছেন না কেন, `AVG()` একটি সংক্ষিপ্ত সারাংশ প্রদান করে। এটি বেঞ্চমার্কিং এবং সাধারণ পারফরম্যান্স বা বৈশিষ্ট্য বোঝার জন্য সহায়ক।
 
-**For example**, to determine the average price of items listed in a products table, you would execute:
+**উদাহরণস্বরূপ**, একটি products টেবিলে তালিকাভুক্ত আইটেমের গড় মূল্য নির্ধারণ করতে, আপনি নিম্নলিখিত কুয়েরি এক্সিকিউট করবেন:
 
 ```sql
 SELECT AVG(price) AS average_product_price FROM products;
 ```
+এই প্রতিটি অ্যাগ্রিগেট ফাংশন `GROUP BY` ক্লজের সাথে যুক্ত হলে আরও শক্তিশালী হয়ে ওঠে, যা আপনাকে আপনার ডেটার নির্দিষ্ট উপসেটে এই গণনাগুলো সম্পাদন করতে সক্ষম করে - যেমনটি আমরা পূর্বে আলোচনা করেছি।
 
-Each of these aggregate functions becomes even more powerful when combined with the `GROUP BY` clause, allowing you to perform these calculations on specific subsets of your data, as discussed previously.
+**উদাহরণস্বরূপ**, প্রতিটি বিভাগের (department) জন্য গড় বেতন বের করতে:
+```sql
+SELECT department, AVG(salary) as avg_salary
+FROM employees
+GROUP BY department;
+
