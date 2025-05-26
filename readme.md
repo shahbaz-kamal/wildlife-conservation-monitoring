@@ -220,16 +220,18 @@ LIMIT 5 OFFSET 12;
 
 **সারসংক্ষেপ:**
 
-- রিটার্ন করা সারির সংখ্যা সীমিত করতে `LIMIT` ব্যবহার করুন
-- রেজাল্ট প্রদর্শন শুরু করার আগে সারি স্কিপ করতে `OFFSET` ব্যবহার করুন
+- রিটার্ন করা সারির সংখ্যা সীমিত করতে `LIMIT` ব্যবহৃত হবে।
+- রেজাল্ট প্রদর্শন শুরু করার আগে সারি স্কিপ করতে `OFFSET` ব্যবহৃত হবে।
 
 এই কম্বিনেশনটি ডেটাকে ছোট ছোট অংশে দক্ষতার সাথে লোড করার জন্য আদর্শ, যেমন একটি ওয়েব অ্যাপ্লিকেশনে প্রতি পৃষ্ঠায় ৫টি ফলাফল দেখানোর জন্য।
 
 # Q7) How can you modify data using `UPDATE` statements?
 
-**Answer:** To modify existing data within a table in a database, you use the `UPDATE` statement. This powerful SQL command allows you to change the values of one or more columns for specific rows that meet a defined condition. The basic structure of an `UPDATE` statement involves specifying the table you want to modify, the columns you intend to change, their new values, and most importantly, a `WHERE` clause to identify which rows should be updated. Without a `WHERE` clause, the `UPDATE` statement would, by default, apply the changes to all rows in the table, which can lead to unintended data loss or corruption. For example, to change the email address of a specific user, you would use an UPDATE statement with a `WHERE` clause that identifies that user, perhaps by their `unique ID`. Similarly, to give a raise to all employees in a particular department, you would use `UPDATE` to modify the salary column for all rows where the department column matches the specified department. This selective modification ensures data integrity and allows for precise adjustments to your database records.
+**উত্তর:** ডাটাবেস টেবিলের বিদ্যমান ডেটা পরিবর্তন করতে আপনি `UPDATE` স্টেটমেন্ট ব্যবহার করেন। এই শক্তিশালী SQL কমান্ড আপনাকে এক বা একাধিক কলামের মান পরিবর্তন করতে দেয় নির্দিষ্ট শর্ত পূরণকারী সারিগুলোর জন্য। একটি `UPDATE` স্টেটমেন্টের মৌলিক কাঠামোতে আপনি যে টেবিলটি পরিবর্তন করতে চান তা নির্দিষ্ট করতে হবে, যে কলামগুলো পরিবর্তন করতে চান তা উল্লেখ করতে হবে, তাদের নতুন মান দিতে হবে এবং সবচেয়ে গুরুত্বপূর্ণ হলো, কোন সারিগুলো আপডেট করা হবে তা চিহ্নিত করতে একটি `WHERE` ক্লজ যোগ করতে হবে। `WHERE` ক্লজ ছাড়া, `UPDATE` স্টেটমেন্ট ডিফল্টভাবে টেবিলের সমস্ত সারিতে পরিবর্তন প্রয়োগ করবে, যা অনিচ্ছাকৃত ডেটা হারানো বা ক্ষতির কারণ হতে পারে। 
 
-**For example**, to change the name of a user in a users table with an id of 5, you would write:
+উদাহরণস্বরূপ, একটি নির্দিষ্ট ব্যবহারকারীর ইমেইল ঠিকানা পরিবর্তন করতে, আপনি একটি `UPDATE` স্টেটমেন্ট ব্যবহার করবেন যাতে একটি `WHERE` ক্লজ থাকবে যা সেই ব্যবহারকারীকে চিহ্নিত করে, সম্ভবত তাদের `unique ID` এর মাধ্যমে। একইভাবে, একটি নির্দিষ্ট বিভাগের সমস্ত কর্মচারীকে বেতন বৃদ্ধি দিতে, আপনি `UPDATE` ব্যবহার করে বেতন কলামটি পরিবর্তন করবেন সেই সমস্ত সারির জন্য যেখানে বিভাগ কলামটি নির্দিষ্ট বিভাগের সাথে মেলে। এই নির্বাচনী পরিবর্তন ডেটার অখণ্ডতা নিশ্চিত করে এবং আপনার ডাটাবেস রেকর্ডে সুনির্দিষ্ট সমন্বয়ের অনুমতি দেয়।
+
+**উদাহরণ**, users টেবিলে id 5 বিশিষ্ট একজন ব্যবহারকারীর নাম পরিবর্তন করতে, আপনি লিখবেন:
 
 ```sql
 UPDATE users
@@ -237,7 +239,7 @@ SET name = 'Abul Mia'
 WHERE id = 5;
 ```
 
-You can also update multiple columns at once:
+আপনি একসাথে একাধিক কলামও আপডেট করতে পারেন:
 
 ```sql
 UPDATE users
@@ -245,7 +247,7 @@ SET name = 'Babul Mia', email = 'babul@mia.com'
 WHERE id = 7;
 ```
 
-**In summary**, `UPDATE` statements provide a powerful way to change existing data in a database, but it is important to use the `WHERE` clause carefully to avoid unintentional data changes.
+**সারসংক্ষেপ**, `UPDATE` স্টেটমেন্ট ডাটাবেসে বিদ্যমান ডেটা পরিবর্তনের একটি শক্তিশালী উপায় প্রদান করে, তবে অনিচ্ছাকৃত ডেটা পরিবর্তন এড়াতে `WHERE` ক্লজটি সতর্কতার সাথে ব্যবহার করা গুরুত্বপূর্ণ।
 
 # Q8) What is the significance of the `JOIN` operation, and how does it work in PostgreSQL?
 
