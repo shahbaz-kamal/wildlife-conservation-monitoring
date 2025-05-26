@@ -229,9 +229,9 @@ LIMIT 5 OFFSET 12;
 
 **উত্তর:** ডাটাবেস টেবিলের বিদ্যমান ডেটা পরিবর্তন করতে আপনি `UPDATE` স্টেটমেন্ট ব্যবহার করেন। এই শক্তিশালী SQL কমান্ড আপনাকে এক বা একাধিক কলামের মান পরিবর্তন করতে দেয় নির্দিষ্ট শর্ত পূরণকারী সারিগুলোর জন্য। একটি `UPDATE` স্টেটমেন্টের মৌলিক কাঠামোতে আপনি যে টেবিলটি পরিবর্তন করতে চান তা নির্দিষ্ট করতে হবে, যে কলামগুলো পরিবর্তন করতে চান তা উল্লেখ করতে হবে, তাদের নতুন মান দিতে হবে এবং সবচেয়ে গুরুত্বপূর্ণ হলো, কোন সারিগুলো আপডেট করা হবে তা চিহ্নিত করতে একটি `WHERE` ক্লজ যোগ করতে হবে। `WHERE` ক্লজ ছাড়া, `UPDATE` স্টেটমেন্ট ডিফল্টভাবে টেবিলের সমস্ত সারিতে পরিবর্তন প্রয়োগ করবে, যা অনিচ্ছাকৃত ডেটা হারানো বা ক্ষতির কারণ হতে পারে। 
 
-উদাহরণস্বরূপ, একটি নির্দিষ্ট ব্যবহারকারীর ইমেইল ঠিকানা পরিবর্তন করতে, আপনি একটি `UPDATE` স্টেটমেন্ট ব্যবহার করবেন যাতে একটি `WHERE` ক্লজ থাকবে যা সেই ব্যবহারকারীকে চিহ্নিত করে, সম্ভবত তাদের `unique ID` এর মাধ্যমে। একইভাবে, একটি নির্দিষ্ট বিভাগের সমস্ত কর্মচারীকে বেতন বৃদ্ধি দিতে, আপনি `UPDATE` ব্যবহার করে বেতন কলামটি পরিবর্তন করবেন সেই সমস্ত সারির জন্য যেখানে বিভাগ কলামটি নির্দিষ্ট বিভাগের সাথে মেলে। এই নির্বাচনী পরিবর্তন ডেটার অখণ্ডতা নিশ্চিত করে এবং আপনার ডাটাবেস রেকর্ডে সুনির্দিষ্ট সমন্বয়ের অনুমতি দেয়।
+উদাহরণস্বরূপ, একটি নির্দিষ্ট ব্যবহারকারীর ইমেইল ঠিকানা পরিবর্তন করতে, আপনি একটি `UPDATE` স্টেটমেন্ট ব্যবহার করবেন যাতে একটি `WHERE` ক্লজ থাকবে যা সেই ব্যবহারকারীকে চিহ্নিত করে, তাদের `unique ID` এর মাধ্যমে। একইভাবে, একটি নির্দিষ্ট বিভাগের সমস্ত কর্মচারীকে বেতন বৃদ্ধি দিতে, আপনি `UPDATE` ব্যবহার করে বেতন কলামটি পরিবর্তন করবেন সেই সমস্ত সারির জন্য যেখানে বিভাগ কলামটি নির্দিষ্ট বিভাগের সাথে মেলে। এই নির্বাচনী পরিবর্তন ডেটার অখণ্ডতা নিশ্চিত করে এবং আপনার ডাটাবেস রেকর্ডে সুনির্দিষ্ট সমন্বয়ের অনুমতি দেয়।
 
-**উদাহরণ**, users টেবিলে id 5 বিশিষ্ট একজন ব্যবহারকারীর নাম পরিবর্তন করতে, আপনি লিখবেন:
+**উদাহরণ**, `users` টেবিলে id 5 বিশিষ্ট একজন ব্যবহারকারীর নাম পরিবর্তন করতে, আপনি লিখবেন:
 
 ```sql
 UPDATE users
@@ -247,14 +247,16 @@ SET name = 'Babul Mia', email = 'babul@mia.com'
 WHERE id = 7;
 ```
 
-**সারসংক্ষেপ**, `UPDATE` স্টেটমেন্ট ডাটাবেসে বিদ্যমান ডেটা পরিবর্তনের একটি শক্তিশালী উপায় প্রদান করে, তবে অনিচ্ছাকৃত ডেটা পরিবর্তন এড়াতে `WHERE` ক্লজটি সতর্কতার সাথে ব্যবহার করা গুরুত্বপূর্ণ।
+**সারসংক্ষেপ**:<br>
+ `UPDATE` স্টেটমেন্ট ডাটাবেসে বিদ্যমান ডেটা পরিবর্তনের একটি শক্তিশালী উপায় প্রদান করে, তবে অনিচ্ছাকৃত ডেটা পরিবর্তন এড়াতে `WHERE` ক্লজটি সতর্কতার সাথে ব্যবহার করা গুরুত্বপূর্ণ।
 
 # Q8) What is the significance of the `JOIN` operation, and how does it work in PostgreSQL?
 
-**Answer:** The `JOIN` operation is fundamental in relational databases like PostgreSQL as it enables combining data from multiple tables based on related columns. This relational capability is what makes SQL databases powerful for working with normalized data structures where information is distributed across different tables. In PostgreSQL, as in other relational databases, JOIN is used to retrieve meaningful data from multiple tables by linking them through foreign key relationships.
-The most common type of `join` is the `INNER JOIN`, which returns only the rows that have matching values in both tables. For instance, if you have a rangers table and a sightings table, you can use an `INNER JOIN` to retrieve the name of each ranger along with the species they’ve sighted.
+**উত্তর:** `JOIN` অপারেশন PostgreSQL-এর মতো রিলেশনাল ডাটাবেসে একটি মৌলিক ধারণা, কারণ এটি সম্পর্কিত কলামের ভিত্তিতে একাধিক টেবিল থেকে ডেটা একত্রিত করতে সক্ষম করে। এই রিলেশনাল সক্ষমতাই SQL ডাটাবেসকে নর্মালাইজড ডেটা স্ট্রাকচারের সাথে কাজ করার জন্য শক্তিশালী করে তোলে, যেখানে তথ্য বিভিন্ন টেবিলে বিতরণ করা থাকে। PostgreSQL-এ, অন্যান্য রিলেশনাল ডাটাবেসের মতো, JOIN ব্যবহার করে একাধিক টেবিল থেকে অর্থপূর্ণ ডেটা রিট্রিভ করা যায়, ফরেন কী রিলেশনশিপের মাধ্যমে টেবিলগুলিকে সংযুক্ত করে।
 
-**Example:**
+সবচেয়ে সাধারণ ধরনের `join` হলো `INNER JOIN`, যা শুধুমাত্র সেই সারিগুলো রিটার্ন করে যাদের মান উভয় টেবিলে মিলে যায়। উদাহরণস্বরূপ, আপনার যদি একটি rangers টেবিল এবং একটি sightings টেবিল থাকে, আপনি `INNER JOIN` ব্যবহার করে প্রতিটি রেঞ্জারের নাম এবং তারা যে প্রজাতি অবলোকন করেছে তা রিট্রিভ করতে পারেন।
+
+**উদাহরণ:**
 
 ```sql
 SELECT rangers.name, species.species_id
@@ -262,14 +264,14 @@ FROM rangers
 INNER JOIN sightings  ON rangers.ranger_id = species.ranger_id;
 ```
 
-Other types of joins include:
+অন্যান্য ধরনের জয়েনগুলোর মধ্যে রয়েছে:
 
-- **LEFT JOIN**: Returns all rows from the left table and the matched rows from the right table. If there is no match, the result is `NULL` on the right side.
-- **RIGHT JOIN**: Returns all rows from the right table and matched rows from the left table.
-- **FULL JOIN**: Returns rows when there is a match in one of the tables. It combines the results of both `LEFT` and `RIGHT` joins.
-- **CROSS JOIN**: Returns the Cartesian product of the two tables, meaning it combines each row of the first table with every row of the second.
+- **LEFT JOIN**: বাম টেবিলের সব সারি এবং ডান টেবিলের মিলে যাওয়া সারিগুলো রিটার্ন করে। যদি কোনো ম্যাচ না থাকে, ডান পাশের রেজাল্ট হবে `NULL`।
+- **RIGHT JOIN**: ডান টেবিলের সব সারি এবং বাম টেবিলের মিলে যাওয়া সারিগুলো রিটার্ন করে।
+- **FULL JOIN**: যেকোনো একটি টেবিলে মিল পাওয়া গেলে সারিগুলো রিটার্ন করে। এটি `LEFT` এবং `RIGHT` জয়েন উভয়ের ফলাফল একত্রিত করে।
+- **CROSS JOIN**: দুইটি টেবিলের কার্টেসিয়ান প্রোডাক্ট রিটার্ন করে, অর্থাৎ প্রথম টেবিলের প্রতিটি সারিকে দ্বিতীয় টেবিলের প্রতিটি সারির সাথে কম্বাইন করে।
 
-In PostgreSQL, joins are essential for working with normalized data spread across multiple tables. They help maintain data integrity and enable efficient, organized querying of complex relationships.
+PostgreSQL-এ জয়েনগুলি একাধিক টেবিলে ছড়িয়ে থাকা নর্মালাইজড ডেটার সাথে কাজ করার জন্য অপরিহার্য। এগুলি ডেটার অখণ্ডতা বজায় রাখতে এবং জটিল রিলেশনশিপের দক্ষ ও সাংগঠনিক কুয়েরি করতে সক্ষম করে।
 
 # Q9) Explain the `GROUP BY` clause and its role in aggregation operations.
 
