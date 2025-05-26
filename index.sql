@@ -40,20 +40,6 @@ CREATE TABLE
     )
 
 
--- //Droping table
-
-DROP TABLE rangers;
-
-DROP TABLE species;
-
-DROP TABLE sightings;
-
-SELECT  * from rangers;
-
-SELECT * from species;
-
-SELECT * from sightings;
-
 --// Inserting data
 
 INSERT INTO rangers (name, region) VALUES
@@ -103,7 +89,7 @@ VALUES
 ('Arrau Turtle', 'Podocnemis expansa', '1783-01-01', 'Vulnerable'),
 ('Sunbittern', 'Eurypyga helias', '1789-01-01', 'Least Concern');
 
-SELECT * from species
+
 
 INSERT INTO sightings (sighting_time, location, notes, ranger_id, species_id) VALUES
 ('2025-03-01 07:45:00', 'Purus River Pass', 'Observed crossing riverbank', 7, 1),
@@ -122,7 +108,7 @@ INSERT INTO sightings (sighting_time, location, notes, ranger_id, species_id) VA
 ('2024-03-20 09:25:00', 'Amazon Creek Pass', 'Resting on rock', 8, 14),
 ('2024-03-21 16:00:00', 'Manaus Observation Deck', 'Flock observed feeding', 1, 15);
 
-SELECT * FROM sightings;
+
 
 --* 1️⃣ Query to register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
 
@@ -150,7 +136,11 @@ SELECT sp.common_name  from species AS sp FULL JOIN sightings AS si
     GROUP BY common_name, si.sighting_id HAVING si.sighting_id IS NULL
 
 -- *6️⃣ Query to find the most recent 2 sightings of each species.
-SELECT common_name,sighting_time,name FROM sightings JOIN species ON sightings.species_id = species.species_id JOIN rangers ON sightings.ranger_id=rangers.ranger_id ORDER BY sightings.sighting_time DESC LIMIT 2;
+SELECT common_name,sighting_time,name FROM sightings 
+    JOIN species ON sightings.species_id = species.species_id   
+    JOIN rangers ON sightings.ranger_id=rangers.ranger_id 
+    ORDER BY sightings.sighting_time 
+    DESC LIMIT 2;
 
 -- *7️⃣ Query to Update all species discovered before year 1800 to have status 'Historic'
 
