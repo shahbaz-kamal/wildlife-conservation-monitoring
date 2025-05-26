@@ -1,10 +1,10 @@
-# Q1) What is PostgreSQL?
+# Q1) What is PostgreSQL? 
 
-**Answer:**PostgreSQL (often called Postgres) is a powerful, open-source object-relational database system known for its reliability, scalability, and advanced features. Unlike simpler databases, PostgreSQL supports complex queries, large-scale data operations, and even non-relational data formats like JSON, making it a favorite for modern applications.
+**উত্তর:** PostgreSQL একটি শক্তিশালী, ওপেন-সোর্স object-relational database system, যা এর নির্ভরযোগ্যতা, প্রসারযোগ্যতা এবং উন্নত ফিচারগুলোর জন্য পরিচিত। আধুনিক অ্যাপ্লিকেশনের উপযোগী করে তুলেছে এর জটিল কুয়েরি হ্যান্ডলিং, বৃহৎ ডেটা প্রসেসিং সক্ষমতা এবং JSON-এর মতো নন-রিলেশনাল ডেটা ফরম্যাট সাপোর্ট।
 
-Originally developed in 1986 at UC Berkeley, PostgreSQL has grown into one of the most trusted database systems in the world. It's fully ACID-compliant (ensuring data integrity), supports multi-version concurrency control (MVCC), and is highly extensible—allowing developers to add custom functions, data types, and even programming languages like Python and JavaScript directly into the database.
+১৯৮৬ সালে UC Berkeley-তে যাত্রা শুরু করে, PostgreSQL আজ বিশ্বজুড়ে অন্যতম নির্ভরযোগ্য ডেটাবেস সিস্টেম হিসেবে প্রতিষ্ঠিত। এটি ACID-compliant, MVCC সাপোর্টেড এবং অত্যন্ত extensible, যার ফলে ডেভেলপাররা কাস্টম ফাংশন, ডেটা টাইপ এবং এমনকি Python বা JavaScript এর মতো ভাষাও ডেটাবেসে ইন্টিগ্রেট করতে পারেন।
 
-Major cloud providers (AWS, Google Cloud, Azure) offer PostgreSQL as a managed service, proving its importance in enterprise and web applications.
+AWS, Google Cloud এবং Azure-এর মতো শীর্ষ ক্লাউড সার্ভিস প্রোভাইডাররা PostgreSQL-কে managed service হিসেবে অফার করে—যা এর এন্টারপ্রাইজ এবং ওয়েব অ্যাপ্লিকেশনে গুরুত্বপূর্ণ ভূমিকার স্বীকৃতি।
 
 ## Key Features of PostgreSQL
 
