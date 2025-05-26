@@ -1,5 +1,6 @@
 -- Active: 1747504319902@@localhost@5432@conservation_db@public
 CREATE DATABASE conservation_db
+
 --// creating tables
 
 CREATE TABLE
@@ -34,11 +35,12 @@ CREATE TABLE
         notes TEXT,
         ranger_id INT,
         species_id INT,
-        Foreign Key (ranger_id) REFERENCES rangers (ranger_id),
-        Foreign Key (species_id) REFERENCES species (species_id)
+        Foreign Key (ranger_id) REFERENCES rangers (ranger_id) ON DELETE SET NULL,
+        Foreign Key (species_id) REFERENCES species (species_id) ON DELETE CASCADE
     )
 
-    -- //Droping table
+
+-- //Droping table
 
 DROP TABLE rangers;
 
@@ -125,12 +127,10 @@ SELECT * FROM sightings;
 --* 1️⃣ Query to register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
 
 INSERT INTO rangers (name,region) VALUES ('Derek Fox', 'Coastal Plains');
-
-SELECT * from rangers;
+SELECT * FROM rangers;
 
 -- *2️⃣ Query to count unique specis ever sighted
 
-SELECT * from sightings
 
 SELECT COUNT(DISTINCT species_id) AS unique_species_count FROM sightings;
 
@@ -140,41 +140,26 @@ SELECT * FROM sightings WHERE location LIKE '%Pass%';
 
 -- *4️⃣ Query to List each ranger's name and their total number of sightings.
 
-select * from rangers
-
-SELECT * from sightings
-
 SELECT name, count(*) AS total_sightings from rangers 
     JOIN sightings ON rangers.ranger_id = sightings.ranger_id 
         GROUP BY rangers.name;
 
 -- *5️⃣ Query to List species that have never been sighted.
-
-SELECT * FROM species;
-SELECT * FROM sightings;
-
 SELECT sp.common_name  from species AS sp FULL JOIN sightings AS si  
     ON sp.species_id = si.species_id 
     GROUP BY common_name, si.sighting_id HAVING si.sighting_id IS NULL
 
 -- *6️⃣ Query to find the most recent 2 sightings of each species.
-
-SELECT * FROM sightings;
-SELECT * from rangers
-
-SELECT * from species
-
 SELECT common_name,sighting_time,name FROM sightings JOIN species ON sightings.species_id = species.species_id JOIN rangers ON sightings.ranger_id=rangers.ranger_id ORDER BY sightings.sighting_time DESC LIMIT 2;
 
 -- *7️⃣ Query to Update all species discovered before year 1800 to have status 'Historic'
 
-SELECT conservation_status,count(*) FROM species GROUP BY conservation_status ;
-
+-- SELECT conservation_status,count(*) FROM species GROUP BY conservation_status ;
 UPDATE species SET conservation_status ='Historic' WHERE discover_date < '1800-01-01';
 
 -- *8️⃣ Query to Label each sighting's time of day as 'Morning', 'Afternoon', or 'Evening'.
 
-SELECT sighting_id, sighting_time,
+SELECT sighting_id, 
     CASE
         WHEN EXTRACT(HOUR FROM sighting_time) BETWEEN 5 AND 11 THEN 'Morning'
         WHEN EXTRACT(HOUR FROM sighting_time) BETWEEN 12 AND 16 THEN 'Afternoon'
@@ -182,7 +167,7 @@ SELECT sighting_id, sighting_time,
     END AS time_of_day
 FROM sightings ;
 
-SELECT * FROM sightings
+
 
 -- *9️⃣ Query to Delete rangers who have never sighted any species
 
@@ -190,6 +175,6 @@ DELETE FROM rangers
 WHERE ranger_id NOT IN (
     SELECT DISTINCT ranger_id FROM sightings
 );
-SELECT * FROM rangers
+
 
 
